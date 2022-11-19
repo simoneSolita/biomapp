@@ -7,13 +7,12 @@ import com.goblin.consulting.biomapp.utils.toCalendar
 import java.util.*
 
 fun createDatePicker(
-    context : Context,
-    startDate : Date,
+    context: Context,
+    startDate: Date,
     onValueChange: (Date) -> Unit,
-    minDate : Date? = null,
-    maxDate : Date? = null
-)
-{
+    minDate: Date? = null,
+    maxDate: Date? = null
+) {
     val time = startDate.toCalendar()
     val datePickerDialog = DatePickerDialog(
         context, { _, year: Int, month: Int, dayOfMonth: Int ->

@@ -19,5 +19,5 @@ interface PinDao {
 
     @Transaction
     @Query("SELECT * FROM pin WHERE insertDate >= :dateFrom AND insertDate <= :dateTo")
-    fun getPinsByDate(dateFrom: Date,dateTo : Date): List<PinItem>
+    fun getPinsByDate(dateFrom: Date, dateTo: Date): List<PinItem>
 }

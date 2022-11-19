@@ -25,10 +25,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.goblin.consulting.biomapp.R
 import com.goblin.consulting.biomapp.navigation.Screen
 import com.goblin.consulting.biomapp.navigation.setupNavGraph
 import com.goblin.consulting.biomapp.ui.map.MapViewModel
-import com.goblin.consulting.biomapp.R
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
@@ -85,13 +85,14 @@ fun SplashScreen(
             )
         )
         delay(1000L)
+        viewModel.onSplashLoadingFinished()
     }
     Box(
         contentAlignment = Alignment.TopCenter,
         modifier = Modifier.fillMaxSize()
     ) {
         Text(
-            text = "BioMapp",
+            text = viewModel.appName,
             color = Color.Blue,
             fontSize = MaterialTheme.typography.h3.fontSize,
             fontWeight = FontWeight.Bold
@@ -108,15 +109,17 @@ fun SplashScreen(
             modifier = Modifier.scale(scale.value)
         )
     }
-    DisposableEffect(key1 = true) {
-        navController.navigate(Screen.Map.route) {
-            popUpTo(Screen.Splash.route) {
-                inclusive = true
+    if (viewModel.splashLoadingFinished) {
+        DisposableEffect(key1 = true) {
+            navController.navigate(Screen.Map.route) {
+                popUpTo(Screen.Splash.route) {
+                    inclusive = true
+                }
             }
-        }
 
-        //OnStop
-        onDispose {
+            //OnStop
+            onDispose {
+            }
         }
     }
 }

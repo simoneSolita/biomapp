@@ -2,10 +2,10 @@ package com.goblin.consulting.biomapp.di
 
 import android.content.Context
 import com.goblin.consulting.biomapp.dao.PinDao
+import com.goblin.consulting.biomapp.db.AppDatabase
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.internal.bind.DateTypeAdapter
-import com.goblin.consulting.biomapp.db.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

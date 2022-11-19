@@ -4,13 +4,12 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 data class Time(
-    val day : Int,
-    val month : Int,
-    val year : Int
+    val day: Int,
+    val month: Int,
+    val year: Int
 )
 
-fun getDate(day : Int, month : Int, year : Int) : Date
-{
+fun getDate(day: Int, month: Int, year: Int): Date {
     val calendar = Calendar.getInstance()
     calendar.set(Calendar.DAY_OF_MONTH, day)
     calendar.set(Calendar.MONTH, month)
@@ -23,8 +22,7 @@ fun getDate(day : Int, month : Int, year : Int) : Date
     return calendar.time
 }
 
-fun Date.toCalendar() : Time
-{
+fun Date.toCalendar(): Time {
     val calendar = Calendar.getInstance()
     calendar.time = this
 
@@ -35,7 +33,6 @@ fun Date.toCalendar() : Time
     )
 }
 
-fun Date.toFormattedString(format : String = "yyyy-MM-dd") : String
-{
+fun Date.toFormattedString(format: String = "yyyy-MM-dd"): String {
     return SimpleDateFormat(format, Locale.getDefault()).format(this)
 }
