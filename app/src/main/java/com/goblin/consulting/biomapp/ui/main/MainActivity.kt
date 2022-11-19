@@ -91,7 +91,7 @@ fun SplashScreen(
         modifier = Modifier.fillMaxSize()
     ) {
         Text(
-            text = "OIL TRACKER",
+            text = "BioMapp",
             color = Color.Blue,
             fontSize = MaterialTheme.typography.h3.fontSize,
             fontWeight = FontWeight.Bold
