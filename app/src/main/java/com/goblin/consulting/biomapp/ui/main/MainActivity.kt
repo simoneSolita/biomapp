@@ -8,8 +8,7 @@ import androidx.activity.viewModels
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -21,14 +20,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.goblin.consulting.biomapp.R
 import com.goblin.consulting.biomapp.navigation.Screen
 import com.goblin.consulting.biomapp.navigation.setupNavGraph
 import com.goblin.consulting.biomapp.ui.map.MapViewModel
+import com.goblin.consulting.biomapp.ui.theme.BioMappTheme
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,10 +55,12 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
-                Navigation(
-                    viewModel = viewModel
-                )
+            BioMappTheme {
+                Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
+                    Navigation(
+                        viewModel = viewModel
+                    )
+                }
             }
         }
     }
@@ -70,6 +79,44 @@ fun SplashScreen(
     navController: NavController,
     viewModel: MainActivityViewModel
 ) {
+//    Background Image
+    Image(
+        painter = painterResource(
+            id = R.drawable.splash_background_image
+        ),
+        contentDescription = stringResource(id = R.string.splash_background_image_cd),
+        modifier = Modifier.fillMaxSize(),
+        contentScale = ContentScale.Crop
+    )
+
+//    Background vector
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.End
+    ) {
+        Image(
+            imageVector = ImageVector.vectorResource(id = R.drawable.splash_background_vector),
+            contentDescription = stringResource(
+                id = R.string.splash_background_vector
+            )
+        )
+    }
+
+    Row(
+        modifier =
+        Modifier
+            .fillMaxWidth()
+            .offset(0.dp, 80.dp),
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = stringResource(id = R.string.app_name).uppercase(),
+            color = Color.Black,
+            style = MaterialTheme.typography.h1,
+
+            )
+    }
+
 
     val scale = remember {
         Animatable(0f)
@@ -87,17 +134,7 @@ fun SplashScreen(
         delay(1000L)
         viewModel.onSplashLoadingFinished()
     }
-    Box(
-        contentAlignment = Alignment.TopCenter,
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Text(
-            text = viewModel.appName,
-            color = Color.Blue,
-            fontSize = MaterialTheme.typography.h3.fontSize,
-            fontWeight = FontWeight.Bold
-        )
-    }
+
 
     Box(
         contentAlignment = Alignment.Center,

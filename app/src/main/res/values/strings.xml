@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BioMapp</string>
+    <string name="splash_background_image_cd">Sfondo app</string>
+    <string name="splash_background_vector">Vettore</string>
 </resources>

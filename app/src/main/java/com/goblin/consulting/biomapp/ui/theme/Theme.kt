@@ -13,9 +13,9 @@ private val DarkColorPalette = darkColors(
 )
 
 private val LightColorPalette = lightColors(
-    primary = Purple500,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = primary,
+    primaryVariant = primaryVariant,
+    secondary = secondary
 
     /* Other default colors to override
     background = Color.White,
@@ -29,12 +29,14 @@ private val LightColorPalette = lightColors(
 
 @Composable
 fun BioMappTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
-    }
+    // TODO: Valutare possibilità di avere modalità notturna
+//    val colors = if (darkTheme) {
+//        DarkColorPalette
+//    } else {
+//        LightColorPalette
+//    }
 
+    val colors = LightColorPalette
     MaterialTheme(
         colors = colors,
         typography = Typography,
