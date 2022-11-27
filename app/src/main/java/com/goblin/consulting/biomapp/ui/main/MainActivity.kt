@@ -1,5 +1,6 @@
 package com.goblin.consulting.biomapp.ui.main
 
+import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.os.Bundle
 import android.view.animation.OvershootInterpolator
 import androidx.activity.ComponentActivity
@@ -25,17 +26,16 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.goblin.consulting.biomapp.R
+import com.goblin.consulting.biomapp.navigation.MyNavGraph
 import com.goblin.consulting.biomapp.navigation.Screen
-import com.goblin.consulting.biomapp.navigation.setupNavGraph
+import com.goblin.consulting.biomapp.ui.components.RequestPermission
 import com.goblin.consulting.biomapp.ui.map.MapViewModel
 import com.goblin.consulting.biomapp.ui.theme.BioMappTheme
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,11 +52,16 @@ class MainActivity : ComponentActivity() {
         fun mapViewModelFactory(): MapViewModel.Factory
     }
 
+    @OptIn(ExperimentalPermissionsApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             BioMappTheme {
-                Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
+                RequestPermission(permission = ACCESS_FINE_LOCATION)
+                Surface(
+                    color = MaterialTheme.colors.background,
+                    modifier = Modifier.fillMaxSize()
+                ) {
                     Navigation(
                         viewModel = viewModel
                     )
@@ -71,7 +76,7 @@ fun Navigation(
     viewModel: MainActivityViewModel
 ) {
     val navController = rememberNavController()
-    setupNavGraph(navController = navController, viewModel = viewModel)
+    MyNavGraph(navController = navController, viewModel = viewModel)
 }
 
 @Composable
@@ -132,7 +137,7 @@ fun SplashScreen(
             )
         )
         delay(1000L)
-        viewModel.onSplashLoadingFinished()
+//        viewModel.onSplashLoadingFinished()
     }
 
 
@@ -160,3 +165,5 @@ fun SplashScreen(
         }
     }
 }
+
+

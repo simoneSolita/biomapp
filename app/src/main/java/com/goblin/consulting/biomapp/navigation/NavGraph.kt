@@ -8,9 +8,11 @@ import androidx.navigation.compose.composable
 import com.goblin.consulting.biomapp.ui.main.MainActivityViewModel
 import com.goblin.consulting.biomapp.ui.main.SplashScreen
 import com.goblin.consulting.biomapp.ui.map.MapScreen
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @Composable
-fun setupNavGraph(
+fun MyNavGraph(
     navController: NavHostController,
     viewModel: ViewModel
 ) {

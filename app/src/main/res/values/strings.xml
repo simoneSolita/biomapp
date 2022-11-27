@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">BioMapp</string>
     <string name="splash_background_image_cd">Sfondo app</string>
+    <string name="rationale_permission">Per utilizzare BioMapp devi accettare i permessi di condivisione della tua posizione</string>
+    <string name="dialog_permission_title">Abilita permesso</string>
+    <string name="enable_permission">Abilita</string>
+    <string name="dialog_permission_description">Per poter utilizzare BioMapp devi abilitare i permessi</string>
     <string name="splash_background_vector">Vettore</string>
+    <string name="map_screen_no_location_permission_given">Permessi di posizione non accettati</string>
 </resources>
