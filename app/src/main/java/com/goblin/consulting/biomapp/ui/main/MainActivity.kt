@@ -10,6 +10,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -34,6 +35,7 @@ import androidx.navigation.compose.rememberNavController
 import com.goblin.consulting.biomapp.R
 import com.goblin.consulting.biomapp.navigation.Screen
 import com.goblin.consulting.biomapp.navigation.setupNavGraph
+import com.goblin.consulting.biomapp.ui.components.DexterPermissions
 import com.goblin.consulting.biomapp.ui.map.MapViewModel
 import com.goblin.consulting.biomapp.ui.theme.BioMappTheme
 import dagger.hilt.EntryPoint
@@ -146,7 +148,13 @@ fun SplashScreen(
             modifier = Modifier.scale(scale.value)
         )
     }
-    if (viewModel.splashLoadingFinished) {
+
+    DexterPermissions(
+        { viewModel.onPermissionGiven() },
+        { viewModel.onPermissionRefused() }
+    )
+
+    if (viewModel.goToMap) {
         DisposableEffect(key1 = true) {
             navController.navigate(Screen.Map.route) {
                 popUpTo(Screen.Splash.route) {

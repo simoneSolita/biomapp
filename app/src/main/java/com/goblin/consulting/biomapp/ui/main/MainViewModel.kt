@@ -11,9 +11,28 @@ import javax.inject.Inject
 class MainActivityViewModel @Inject constructor(
 ) : ViewModel() {
     var splashLoadingFinished: Boolean by mutableStateOf(false)
+    var permissionOK: Boolean by mutableStateOf(false)
+    var permissionKO: Boolean by mutableStateOf(false)
+    var goToMap: Boolean by mutableStateOf(false)
     var appName: String by mutableStateOf("BioMapp")
 
     fun onSplashLoadingFinished() {
         splashLoadingFinished = true
+        continueToMap()
+    }
+
+    fun onPermissionGiven() {
+        permissionOK = true
+        continueToMap()
+    }
+
+    fun onPermissionRefused() {
+        permissionKO = true
+    }
+
+    private fun continueToMap(){
+        if (permissionOK && splashLoadingFinished){
+            goToMap = true
+        }
     }
 }
